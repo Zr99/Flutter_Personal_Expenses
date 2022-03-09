@@ -20,8 +20,7 @@ class MyHomePage extends StatelessWidget {
   final List<Transaction> transactions = [
     Transaction(
         id: 't1', title: 'New Shoes', amount: 98.50, date: DateTime.now()),
-    Transaction(
-      id: 't2', title: 'New Socks', amount: 60, date: DateTime.now()),
+    Transaction(id: 't2', title: 'New Socks', amount: 60, date: DateTime.now()),
   ];
 
   @override
@@ -50,7 +49,7 @@ class MyHomePage extends StatelessWidget {
                       margin:
                           EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                       child: Text(
-                        tx.amount.toString(),
+                        '\$${tx.amount}',
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
