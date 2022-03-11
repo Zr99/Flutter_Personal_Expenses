@@ -39,7 +39,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final String _title = 'Personal Expenses';
 
-  final List<Transaction> transactions = [];
+ // final List<Transaction> transactions = [];
 
   // String? titleInput;
   //final titleController = TextEditingController();
@@ -50,6 +50,16 @@ class _MyHomePageState extends State<MyHomePage> {
     //     id: 't1', title: 'New Shoes', amount: 98.50, date: DateTime.now()),
     // Transaction(id: 't2', title: 'New Socks', amount: 60, date: DateTime.now()),
   ];
+
+  List<Transaction> get _recentTransactions {
+    return _userTransactions.where((tx) {
+      return tx.date.isAfter(
+        DateTime.now().subtract(
+          Duration(days: 7)
+          ),
+      );
+    }).toList();
+  }
 
   void _addNewTransaction(String txTitle, double txAmount) {
     final newTx = Transaction(
@@ -78,6 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+   
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -97,6 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           //mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
+            Chart(_recentTransactions),
             TransactionList(_userTransactions),
           ],
         ),
