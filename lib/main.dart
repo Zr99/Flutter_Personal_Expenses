@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Personal Expenses',
       theme: ThemeData(
         primarySwatch: Colors.purple,
@@ -39,7 +40,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final String _title = 'Personal Expenses';
 
- // final List<Transaction> transactions = [];
+  // final List<Transaction> transactions = [];
 
   // String? titleInput;
   //final titleController = TextEditingController();
@@ -54,9 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Transaction> get _recentTransactions {
     return _userTransactions.where((tx) {
       return tx.date.isAfter(
-        DateTime.now().subtract(
-          Duration(days: 7)
-          ),
+        DateTime.now().subtract(Duration(days: 7)),
       );
     }).toList();
   }
@@ -88,7 +87,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-   
     return Scaffold(
       appBar: AppBar(
         title: Text(
