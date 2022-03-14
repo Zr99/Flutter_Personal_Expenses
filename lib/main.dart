@@ -10,9 +10,9 @@ import 'package:flutter/services.dart';
 
 void main() {
   //make sure the app is potrait
- // WidgetsFlutterBinding.ensureInitialized();
+  // WidgetsFlutterBinding.ensureInitialized();
   //SystemChrome.setPreferredOrientations(
-    //  [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  //  [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   runApp(MyApp());
 }
 
@@ -104,6 +104,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final _isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
+    final _txListWidget =
+        TransactionList(_userTransactions, _deleteTransaction);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -123,6 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           //mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
+            //if (_isLandscape)
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -137,9 +143,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ],
             ),
-            _showChart
-                ? Chart(_recentTransactions)
-                : TransactionList(_userTransactions, _deleteTransaction),
+            _showChart ? Chart(_recentTransactions) : _txListWidget,
           ],
         ),
       ),
